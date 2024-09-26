@@ -135,7 +135,7 @@ def bagi_data_per_kota_kabupaten_dan_tahun(df):
         
         # Ambil nilai indeks kelompok per kategori
         nilai_kategori = []
-        for kat in kategori:
+        for kat in kategori[:5]:  # Hanya gunakan 5 kategori pertama
             if kat in df['Kategori'].values:
                 nilai_kategori.append(df.loc[df['Kategori'] == kat, 'Indeks Kelompok Indikator'].values[0])
             else:
@@ -148,7 +148,7 @@ def bagi_data_per_kota_kabupaten_dan_tahun(df):
         baris_baru = pd.DataFrame({
             "Kota/Kabupaten": [kota],
             "Tahun": [tahun],
-            **{f"Nilai Kategori {i}": [nilai_kategori[i]] for i in range(len(nilai_kategori))},
+            **{kategori[i]: [nilai_kategori[i]] for i in range(len(nilai_kategori))},
             "Nilai IPKD": [ipkd]
         })
 
