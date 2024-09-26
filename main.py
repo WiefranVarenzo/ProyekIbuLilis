@@ -123,10 +123,10 @@ def bagi_data_per_kota_kabupaten_dan_tahun(df):
             kota_kabupaten_dfs[var_name] = indikator_df
 
     # Tambahkan tabel ringkasan hasil akhir
-    hasil_akhir_df = pd.DataFrame(columns=["Kota/Kabupaten", "Tahun", "Nilai Kategori 0", 
-                                            "Nilai Kategori 1", "Nilai Kategori 2", 
-                                            "Nilai Kategori 3", "Nilai Kategori 4", 
-                                            "Nilai Kategori 5", "Nilai IPKD"])
+    hasil_akhir_df = pd.DataFrame(columns=["Kota/Kabupaten", "Tahun", "Kesehatan Balita", 
+                                            "Kesehatan Reproduksi", "Pelayanan Kesehatan", 
+                                            "Penyakit Tidak Menular", "Penyakit Menular", 
+                                            "Nilai IPKD"])
 
     # Loop untuk mengumpulkan data ke dalam hasil_akhir_df
     for kota_kabupaten, df in kota_kabupaten_dfs.items():
