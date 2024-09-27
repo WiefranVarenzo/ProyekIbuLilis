@@ -14,7 +14,6 @@ def bagi_data_per_kota_kabupaten_dan_tahun(df):
     # Hitung nilai minimum dan maksimum untuk setiap indikator di seluruh dataset
     min_values = df.select_dtypes(include='number').min()
     max_values = df.select_dtypes(include='number').max()
-
     # Definisikan bobot untuk setiap indikator
     bobot_data = [5, 5, 4, 4, 4, 5, 5, 4, 5, 4,
                   4, 4, 3, 4, 4, 5, 4, 4, 4, 3,
@@ -27,8 +26,8 @@ def bagi_data_per_kota_kabupaten_dan_tahun(df):
         "Kesehatan Reproduksi",  # Indeks 5 - 9
         "Pelayanan Kesehatan",  # Indeks 10 - 21
         "Penyakit Tidak Menular",  # Indeks 22 - 27
-        "Penyakit Menular",  # Indeks 28 - 35
-        "Sanitasi dan Keadaan Lingkungan"  # Indeks 36 dan seterusnya
+        "Penyakit Menular",  # Indeks 28 - 33
+        "Sanitasi dan Keadaan Lingkungan Hidup"  # Indeks 34 dan seterusnya
     ]
 
     # Loop untuk membagi data berdasarkan KOTA/KABUPATEN
@@ -82,7 +81,7 @@ def bagi_data_per_kota_kabupaten_dan_tahun(df):
                     kategori_labels.append(kategori[2])
                 elif index <= 27:
                     kategori_labels.append(kategori[3])
-                elif index <= 35:
+                elif index <= 33:
                     kategori_labels.append(kategori[4])
                 else:
                     kategori_labels.append(kategori[5])
@@ -126,7 +125,7 @@ def bagi_data_per_kota_kabupaten_dan_tahun(df):
     hasil_akhir_df = pd.DataFrame(columns=["Kota/Kabupaten", "Tahun", "Kesehatan Balita", 
                                             "Kesehatan Reproduksi", "Pelayanan Kesehatan", 
                                             "Penyakit Tidak Menular", "Penyakit Menular", 
-                                            "Nilai IPKD"])
+                                            "Sanitasi dan Keadaan Lingkungan Hidup", "Nilai IPKD"])
 
     # Loop untuk mengumpulkan data ke dalam hasil_akhir_df
     for kota_kabupaten, df in kota_kabupaten_dfs.items():
@@ -135,7 +134,7 @@ def bagi_data_per_kota_kabupaten_dan_tahun(df):
         
         # Ambil nilai indeks kelompok per kategori
         nilai_kategori = []
-        for kat in kategori[:5]:  # Hanya gunakan 5 kategori pertama
+        for kat in kategori:  # Gunakan semua kategori
             if kat in df['Kategori'].values:
                 nilai_kategori.append(df.loc[df['Kategori'] == kat, 'Indeks Kelompok Indikator'].values[0])
             else:
